@@ -8,14 +8,38 @@
 
 A collection of beginner-friendly blogs covering **Git, Networking, DNS, HTTP, HTML, CSS, and JavaScript**.  
 
+<br>
+
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+
 ---
 
 </div>
 
 > 💡 **Goal:** To build clear mental models, provide real-world analogies, and offer simple explanations of how the web actually works.
 
-🔗 **Author:** Sahil Prashar  
-🔗 **Blog Profile:** https://hashnode.com/@sahilprashar  
+<table>
+  <tr>
+    <td><b>🔗 Author:</b> Sahil Prashar</td>
+    <td><b>🔗 Blog Profile:</b> <a href="https://hashnode.com/@sahilprashar">devwithsahil.hashnode.dev</a></td>
+  </tr>
+</table>
+
+## 📚 Table of Contents
+
+- [🧑‍💻 Git & Version Control](#-git--version-control)
+- [🌐 Networking & DNS](#-networking--dns)
+- [🧰 Backend Tools](#-backend-tools)
+- [🌍 Web Fundamentals](#-web-fundamentals)
+- [🎨 HTML & CSS](#-html--css)
+- [✅ JavaScript Topics — Proper Series Order](#-javascript-topics--proper-series-order)
+- [🟢 Node.js & Express](#-nodejs--express)
+- [📝 Notes](#-notes)
 
 ---
 
