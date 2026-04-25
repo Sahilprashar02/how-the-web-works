@@ -1,8 +1,16 @@
+<div align="center">
+
 # How the Web Works 🌐
+
+---
 
 ![Topic](https://img.shields.io/badge/TOPIC-WEB%20DEVELOPMENT-orange?style=for-the-badge) ![Status](https://img.shields.io/badge/STATUS-ACTIVE-brightgreen?style=for-the-badge) ![License](https://img.shields.io/badge/LICENSE-MIT-blue?style=for-the-badge)
 
 A collection of beginner-friendly blogs covering **Git, Networking, DNS, HTTP, HTML, CSS, and JavaScript**.  
+
+---
+
+</div>
 
 > 💡 **Goal:** To build clear mental models, provide real-world analogies, and offer simple explanations of how the web actually works.
 
