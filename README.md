@@ -2,33 +2,46 @@
 
 # How the Web Works 🌐
 
----
+### *First-Principles Web Architecture & Engineering Series*
 
-![Topic](https://img.shields.io/badge/TOPIC-WEB%20DEVELOPMENT-orange?style=for-the-badge) ![Status](https://img.shields.io/badge/STATUS-ACTIVE-brightgreen?style=for-the-badge) ![License](https://img.shields.io/badge/LICENSE-MIT-blue?style=for-the-badge)
+[![Live Platform](https://img.shields.io/badge/LIVE_WEBSITE-how--the--web--works--sahil.netlify.app-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://how-the-web-works-sahil.netlify.app/)
+![Status](https://img.shields.io/badge/STATUS-ACTIVE-brightgreen?style=for-the-badge) 
+![License](https://img.shields.io/badge/LICENSE-MIT-blue?style=for-the-badge)
 
-A collection of beginner-friendly blogs covering **Git, Networking, DNS, HTTP, HTML, CSS, and JavaScript**.  
+A comprehensive, beginner-to-advanced engineering collection covering **Git, Networking, DNS, HTTP, Web Protocols, HTML/CSS, JavaScript Runtimes, Node.js, React Internals, and Distributed Architecture**.  
 
 <br>
 
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+[![Next.js](https://img.shields.io/badge/Next.js%2014-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+![React](https://img.shields.io/badge/React%2018-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+![Hashnode](https://img.shields.io/badge/Hashnode-2962FF?style=for-the-badge&logo=hashnode&logoColor=white)
 
 ---
 
 </div>
 
-> 💡 **Goal:** To build clear mental models, provide real-world analogies, and offer simple explanations of how the web actually works.
+> 🚀 **Live Interactive Web App:** [https://how-the-web-works-sahil.netlify.app/](https://how-the-web-works-sahil.netlify.app/)  
+> 💡 **Goal:** Build clear mental models, first-principles understanding, and deep technical breakdowns of how software actually works under the hood.
 
 <table>
   <tr>
     <td><b>🔗 Author:</b> Sahil Prashar</td>
-    <td><b>🔗 Blog Profile:</b> <a href="https://hashnode.com/@sahilprashar">devwithsahil.hashnode.dev</a></td>
+    <td><b>🌐 Live Web Directory:</b> <a href="https://how-the-web-works-sahil.netlify.app/">how-the-web-works-sahil.netlify.app</a></td>
+    <td><b>✍️ Hashnode Profile:</b> <a href="https://devwithsahil.hashnode.dev">devwithsahil.hashnode.dev</a></td>
   </tr>
 </table>
+
+## ✨ Features
+
+- 📖 **58+ Deep-Dive Topics**: Comprehensive coverage from low-level networking to distributed systems.
+- ⚡ **Instant Search & Category Filtering**: Filter by Git, Networking, JavaScript, Node.js, React, and System Design.
+- 🔗 **Direct Hashnode Redirection**: One-click navigation to published technical articles on Hashnode.
+- 🌌 **Cyber-Glassmorphism Design**: 3D Canvas rocket light trails, starry background animations, and custom platform logo.
+
+---
 
 ## 📚 Table of Contents
 
@@ -395,8 +408,9 @@ A collection of beginner-friendly blogs covering **Git, Networking, DNS, HTTP, H
 
 ---
 
-## 📝 Notes
+## 📝 Notes & Links
 
-- All blogs are **public and live**
-- Written in **simple, beginner-friendly language**
-- Focused on **concept clarity over memorization**
+- **Live Web App:** [how-the-web-works-sahil.netlify.app](https://how-the-web-works-sahil.netlify.app/)
+- **Hashnode Profile:** [devwithsahil.hashnode.dev](https://devwithsahil.hashnode.dev)
+- All blogs are **public and live** on Hashnode
+- Built for engineers who want to understand software from first principles
