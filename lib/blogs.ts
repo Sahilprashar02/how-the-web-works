@@ -16,6 +16,7 @@ export interface BlogPost {
 }
 
 const blogsDirectory = path.join(process.cwd(), 'content/blogs');
+const readmePath = path.join(process.cwd(), 'README.md');
 
 export function getCategoryByNumber(num: number, title: string): string {
   if (num >= 1 && num <= 14) return 'JavaScript Deep Dive';
@@ -27,7 +28,68 @@ export function getCategoryByNumber(num: number, title: string): string {
   return 'Core Engineering';
 }
 
-export function getAllBlogs(): BlogPost[] {
+export function getBlogsFromReadme(): BlogPost[] {
+  if (!fs.existsSync(readmePath)) {
+    return [];
+  }
+
+  const content = fs.readFileSync(readmePath, 'utf8');
+  const sections = content.split(/^## /m);
+  const blogs: BlogPost[] = [];
+  let topicCounter = 1;
+
+  for (const section of sections) {
+    const lines = section.split('\n');
+    const header = lines[0].trim();
+
+    let category = '';
+    if (header.includes('Git')) category = 'Git & Version Control';
+    else if (header.includes('Networking')) category = 'Networking & DNS';
+    else if (header.includes('Backend Tools')) category = 'Backend Tools';
+    else if (header.includes('Web Fundamentals')) category = 'Web Fundamentals';
+    else if (header.includes('HTML')) category = 'HTML & CSS';
+    else if (header.includes('JavaScript')) category = 'JavaScript Deep Dive';
+    else if (header.includes('Node.js')) category = 'Node.js & Express Architecture';
+    else continue; // Skip TOC, Notes, etc.
+
+    // Match <td> blocks
+    const tdMatches = section.match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || [];
+
+    for (const td of tdMatches) {
+      const linkMatch = td.match(/href="(https:\/\/[^"]+)"/i);
+      const titleMatch = td.match(/<b>📖\s*([^<]+)<\/b>/i);
+      const descMatch = td.match(/<i>([^<]+)<\/i>/i);
+
+      if (titleMatch && linkMatch) {
+        const title = titleMatch[1].trim();
+        const hashnodeUrl = linkMatch[1].trim();
+        const subtitle = descMatch ? descMatch[1].trim() : '';
+        const slug = hashnodeUrl.replace('https://devwithsahil.hashnode.dev/', '');
+
+        const description = subtitle
+          ? `${title} — ${subtitle}. Clear mental models and technical breakdown by Sahil Prashar.`
+          : `${title}. Beginner-friendly guide and engineering explanation by Sahil Prashar.`;
+
+        blogs.push({
+          slug,
+          number: topicCounter++,
+          title,
+          description,
+          category,
+          readTime: '4 min read',
+          content: '',
+          rawContent: '',
+          hasImages: false,
+          hashnodeUrl,
+        });
+      }
+    }
+  }
+
+  return blogs;
+}
+
+export function getBlogsFromFolder(): BlogPost[] {
   if (!fs.existsSync(blogsDirectory)) {
     return [];
   }
@@ -51,23 +113,17 @@ export function getAllBlogs(): BlogPost[] {
       data = parsed.data;
       content = parsed.content;
     } catch (err) {
-      // If YAML frontmatter fails (e.g. colons in unquoted strings), fallback to raw content
       content = fileContents;
     }
 
-    // Extract topic number
     const matchNumber = folder.match(/^(\d+)-/);
     const num = matchNumber ? parseInt(matchNumber[1], 10) : 999;
 
-    // Extract title from H1 or folder name
     const h1Match = content.match(/^#\s+(.+)$/m);
     const fallbackTitle = folder.replace(/^\d+-/, '').replace(/-/g, ' ');
     let title = data.title || (h1Match ? h1Match[1].trim() : fallbackTitle);
-
-    // Clean up title formatting if needed
     title = title.replace(/^#+\s*/, '').trim();
 
-    // Extract description from content
     const paragraphs = content
       .split('\n\n')
       .filter((p) => p.trim() && !p.trim().startsWith('#') && !p.trim().startsWith('!['))
@@ -75,12 +131,10 @@ export function getAllBlogs(): BlogPost[] {
     
     const description = data.description || (paragraphs.length > 0 ? paragraphs[0].slice(0, 160) + '...' : 'Technical deep dive by Sahil Prashar.');
 
-    // Calculate reading time
     const wordCount = content.split(/\s+/).length;
     const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 220));
     const readTime = `${readTimeMinutes} min read`;
 
-    // Process image paths inside markdown so they load from public/blogs/[slug]/
     const processedContent = content.replace(
       /!\[([^\]]*)\]\(([^)]+)\)/g,
       (match, alt, imgPath) => {
@@ -93,7 +147,6 @@ export function getAllBlogs(): BlogPost[] {
 
     const category = data.category || getCategoryByNumber(num, title);
 
-    // Compute Hashnode article URL
     const explicitUrl = data.hashnodeUrl || data.hashnode_url || data.link || data.url;
     const slugOverride = data.Slug || data.slug || data['SEO Title']?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     const defaultSlug = folder.replace(/^\d+-/, '').toLowerCase();
@@ -114,11 +167,50 @@ export function getAllBlogs(): BlogPost[] {
     });
   }
 
-  // Sort by topic number ascending (01 to 41)
-  return blogs.sort((a, b) => a.number - b.number);
+  return blogs;
+}
+
+export function getAllBlogs(): BlogPost[] {
+  const readmeBlogs = getBlogsFromReadme();
+  const folderBlogs = getBlogsFromFolder();
+
+  // Create a map to merge blogs without duplication
+  const blogMap = new Map<string, BlogPost>();
+
+  // Add Readme blogs first
+  for (const blog of readmeBlogs) {
+    const key = blog.hashnodeUrl.toLowerCase().trim();
+    blogMap.set(key, blog);
+  }
+
+  // Add or update with Folder blogs (folder blogs have full markdown content & read times)
+  for (const blog of folderBlogs) {
+    const key = blog.hashnodeUrl.toLowerCase().trim();
+    if (blogMap.has(key)) {
+      const existing = blogMap.get(key)!;
+      blogMap.set(key, {
+        ...existing,
+        description: blog.description || existing.description,
+        readTime: blog.readTime,
+        content: blog.content,
+        rawContent: blog.rawContent,
+        hasImages: blog.hasImages,
+      });
+    } else {
+      blogMap.set(key, blog);
+    }
+  }
+
+  const allBlogs = Array.from(blogMap.values());
+
+  // Re-index topic numbers sequentially (1 to N)
+  return allBlogs.map((blog, idx) => ({
+    ...blog,
+    number: idx + 1,
+  }));
 }
 
 export function getBlogBySlug(slug: string): BlogPost | undefined {
   const blogs = getAllBlogs();
-  return blogs.find((b) => b.slug === slug);
+  return blogs.find((b) => b.slug === slug || b.hashnodeUrl.endsWith(`/${slug}`));
 }

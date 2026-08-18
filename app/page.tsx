@@ -41,7 +41,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-base sm:text-lg text-gray-300 max-w-2xl leading-relaxed">
-            A comprehensive, 41-part technical series by <strong className="text-white font-semibold">Sahil Prashar</strong> decoding Git internals, networking protocols, the Node.js Event Loop, React Virtual DOM reconciliation, and distributed system architectures. Click any topic to read the deep dive directly on Hashnode!
+            A comprehensive, {blogs.length}-part technical series by <strong className="text-white font-semibold">Sahil Prashar</strong> decoding Git & Version Control, Networking & DNS, HTML/CSS, Web Fundamentals, JavaScript runtimes, Node.js, React internals, and distributed architecture.
           </p>
 
           {/* Quick Action + Metrics Bar */}

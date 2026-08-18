@@ -50,7 +50,7 @@ export default function BlogExplorer({ blogs }: BlogExplorerProps) {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
-              placeholder="Search 41 engineering blogs (e.g. Event Loop, React, TCP, Promises)..."
+              placeholder={`Search ${blogs.length} engineering blogs (e.g. Git, DNS, Event Loop, React, TCP)...`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-3.5 bg-[#090d16]/90 border border-gray-800 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 transition-all font-sans text-sm sm:text-base shadow-inner"
