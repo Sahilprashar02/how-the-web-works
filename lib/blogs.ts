@@ -12,6 +12,7 @@ export interface BlogPost {
   content: string;
   rawContent: string;
   hasImages: boolean;
+  hashnodeUrl: string;
 }
 
 const blogsDirectory = path.join(process.cwd(), 'content/blogs');
@@ -92,6 +93,13 @@ export function getAllBlogs(): BlogPost[] {
 
     const category = data.category || getCategoryByNumber(num, title);
 
+    // Compute Hashnode article URL
+    const explicitUrl = data.hashnodeUrl || data.hashnode_url || data.link || data.url;
+    const slugOverride = data.Slug || data.slug || data['SEO Title']?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const defaultSlug = folder.replace(/^\d+-/, '').toLowerCase();
+    const hashnodeSlug = slugOverride || defaultSlug;
+    const hashnodeUrl = explicitUrl || `https://devwithsahil.hashnode.dev/${hashnodeSlug}`;
+
     blogs.push({
       slug: folder,
       number: num,
@@ -102,6 +110,7 @@ export function getAllBlogs(): BlogPost[] {
       content: processedContent,
       rawContent: content,
       hasImages: content.includes('!['),
+      hashnodeUrl,
     });
   }
 
