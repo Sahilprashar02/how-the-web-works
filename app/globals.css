@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#070b14] text-gray-200 antialiased selection:bg-blue-500 selection:text-white;
+    @apply bg-[#040711] text-gray-200 antialiased selection:bg-cyan-500 selection:text-white;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
@@ -15,56 +15,65 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #070b14;
+  background: #040711;
 }
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #06b6d4;
 }
 
 /* Glassmorphism Utilities */
 .glass-card {
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(10, 15, 30, 0.65);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
 .glass-card-premium {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(6, 12, 26, 0.85) 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6);
 }
 
 .glass-nav {
-  background: rgba(7, 11, 20, 0.82);
+  background: rgba(4, 7, 17, 0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-badge {
-  background: rgba(37, 99, 235, 0.12);
+  background: rgba(6, 182, 212, 0.12);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  border: 1px solid rgba(6, 182, 212, 0.3);
 }
 
-/* Shimmer & Glow Animations */
+/* Keyframe Animations */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes pulseGlow {
   0%, 100% {
-    opacity: 0.4;
+    opacity: 0.35;
     transform: scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: scale(1.05);
+    opacity: 0.75;
+    transform: scale(1.08);
   }
 }
 
@@ -73,16 +82,77 @@
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-12px) rotate(3deg);
+    transform: translateY(-16px) rotate(5deg);
   }
 }
 
+/* Star Blinking & Drifting Animations */
+@keyframes starBlink {
+  0%, 100% {
+    opacity: 0.12;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes starDrift {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-30px) translateX(22px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes shootingStar {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-35deg) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50px) translateY(50px) rotate(-35deg) scale(1);
+  }
+  30% {
+    transform: translateX(-350px) translateY(350px) rotate(-35deg) scale(1);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-350px) translateY(350px) rotate(-35deg) scale(0);
+    opacity: 0;
+  }
+}
+
+.animate-star {
+  animation: starBlink var(--blink-duration, 3s) ease-in-out infinite var(--delay, 0s),
+             starDrift var(--drift-duration, 15s) ease-in-out infinite var(--delay, 0s);
+}
+
+.shooting-star {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(-45deg, rgba(6, 182, 212, 0), rgba(56, 189, 248, 1), rgba(255, 255, 255, 1));
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.9));
+  animation: shootingStar var(--duration, 8s) ease-in-out infinite var(--delay, 0s);
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
 .animate-pulse-glow {
-  animation: pulseGlow 6s ease-in-out infinite;
+  animation: pulseGlow 7s ease-in-out infinite;
 }
 
 .animate-float {
-  animation: floatOrb 8s ease-in-out infinite;
+  animation: floatOrb 9s ease-in-out infinite;
 }
 
 /* Glowing card hover effects */
@@ -96,7 +166,7 @@
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(99, 102, 241, 0.5), rgba(6, 182, 212, 0.5));
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.6), rgba(16, 185, 129, 0.6), rgba(168, 85, 247, 0.6));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -105,8 +175,8 @@
   pointer-events: none;
 }
 .glow-on-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.25);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.3);
 }
 .glow-on-hover:hover::after {
   opacity: 1;
@@ -114,17 +184,16 @@
 
 /* Code Highlight Overrides */
 .prose pre {
-  background-color: #0b1120 !important;
+  background-color: #060b18 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 0.75rem !important;
   padding: 1.25rem !important;
 }
 
 .prose code {
-  color: #60a5fa;
+  color: #38bdf8;
   font-family: 'JetBrains Mono', monospace;
 }
 .prose pre code {
-  color: #e5e7eb;
+  color: #f1f5f9;
 }
-
